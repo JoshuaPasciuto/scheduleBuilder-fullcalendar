@@ -10,37 +10,42 @@
         }
 
         #external-events {
-            /* position: fixed; */
-            z-index: 2;
+            position: relative;
+            float: left;
+            z-index: 1;
             height: 100%;
-            top: 70px;
+            top: 10px;
             left: 30px;
-            width: 175px;
+            width: 15%;
             padding: 0 10px;
             border: 1px solid #ccc;
             background: #eee;
         }
 
         #external-events .fc-event {
-            margin: 1em 0;
-            height: 50px;
-            font-size: 16pt;
+            margin: 4.5px 0;
+            height: 30px;
+            font-size: 12pt;
             cursor: move;
         }
 
         #calendar-container {
-            position: relative;
-            z-index: 1;
             height: 1200px;
-            margin-left: 200px;
+            margin-left: 10%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
         }
 
-        /* #calendar {
-            max-width: 1200px;
-            height: 1200px;
-            margin: 40px auto;
+        #calendar {
+            float: right;
+            position: relative;
+            vertical-align: top;
+            max-width: 85%;
+            margin: 10px;
 
-        } */
+        }
 
         table {
             height: 100%;
@@ -48,14 +53,30 @@
 
         #calendar,
         tr {
-            font-size: 16pt;
+            /* font-size: 16pt; */
             height: 40px;
+        }
+
+        td {
+            font-size: 16pt !important;
+        }
+
+        .fc-title {
+            font-size: 10pt !important;
+        }
+
+        .fc-content {
+            font-size: 12pt;
         }
 
         .fc-day-header {
             font-size: 24pt;
-            color: rgb(93, 88, 175);
+            color: #5d58af;
             font-weight: bold;
+        }
+
+        .fc-time-grid-event {
+            background-color: #5d58af !important;
         }
     </style>
 
@@ -226,10 +247,11 @@
                 //
                 $('div.fc-time').each(function () {
                     // var timeSub = (($(this).attr("data-full").substring(0, 7)))
-                    startTime.push($(this).attr("data-full").substring(0, 8))
-                    startTime.map(Function.prototype.call, String.prototype.trim)
+                    startTime.push($(this).attr("data-full").substring(0, 8).split(' ').join(''))
                 })
 
+                //check if array contains 'activity' sets activitySubscibed to 1 if yes, 0 if no. Sets activityTime to the value of the element in the position of the
+                //startTime[] as in the events[]
                 if ($.inArray("Wake-Up Time", events) >= 0) {
                     wakeSubscribed = 1;
                     wakeTime = startTime[($.inArray("Wake-Up Time", events))]

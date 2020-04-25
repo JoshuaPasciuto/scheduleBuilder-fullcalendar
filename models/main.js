@@ -73,6 +73,12 @@ document.addEventListener('DOMContentLoaded', function () {
             info.event.remove();
         },
 
+        dayRender: function (date, cell) {
+
+            cell.addTouch();
+
+        },
+
 
     });
 

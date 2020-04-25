@@ -1,0 +1,189 @@
+<head>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 5;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        #external-events {
+            position: fixed;
+            z-index: 2;
+            top: 20px;
+            left: 20px;
+            width: 150px;
+            padding: 0 10px;
+            border: 1px solid #ccc;
+            background: #eee;
+        }
+
+        #external-events .fc-event {
+            margin: 1em 0;
+            cursor: move;
+        }
+
+        #calendar-container {
+            position: relative;
+            z-index: 1;
+            margin-left: 200px;
+        }
+
+        #calendar {
+            max-width: 1200px;
+            max-height: 600px;
+            margin: 40px auto;
+
+        }
+
+        table {
+            height: 50px;
+        }
+
+        #calendar,
+        tr {
+            height: 50px;
+        }
+
+        .fc-day-header {
+            font-size: 18pt;
+            font-weight: bold;
+        }
+    </style>
+    <meta charset='utf-8' />
+
+    <link href='node_modules/@fullcalendar/core/main.css' rel='stylesheet' />
+    <link href='node_modules/@fullcalendar/daygrid/main.css' rel='stylesheet' />
+    <link href='node_modules/@fullcalendar/timegrid/main.css' rel='stylesheet' />
+    <link rel="stylesheet"
+        href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.min.css" />
+
+
+    <script src='node_modules/@fullcalendar/core/main.js'></script>
+    <script src='node_modules/@fullcalendar/daygrid/main.js'></script>
+    <script src='node_modules/@fullcalendar/timegrid/main.js'></script>
+    <script src='node_modules/@fullcalendar/interaction/main.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+
+            /* initialize the external events
+            -----------------------------------------------------------------*/
+
+            $('#external-events').each(function () {
+
+                // store data so the calendar knows to render an event upon drop
+                $(this).data('fc-event', {
+                    title: $.trim($(this).text()), // use the element's text as the event title
+                    stick: true // maintain when user navigates (see docs on the renderEvent method)
+                });
+
+                // make the event draggable using jQuery UI
+                $(this).draggable({
+                    zIndex: 999,
+                    revert: true, // will cause the event to go back to its
+                    revertDuration: 0 //  original position after the drag
+                });
+
+            });
+
+
+            /* initialize the calendar
+            -----------------------------------------------------------------*/
+
+            var calendar = new Calendar(calendarEl, {
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                editable: true,
+                droppable: true, // this allows things to be dropped onto the calendar
+                dragRevertDuration: 0,
+                drop: function () {
+                    // is the "remove after drop" checkbox checked?
+                    if ($('#drop-remove').is(':checked')) {
+                        // if so, remove the element from the "Draggable Events" list
+                        $(this).remove();
+                    }
+                },
+                eventDragStop: function (event, jsEvent, ui, view) {
+
+                    if (isEventOverDiv(jsEvent.clientX, jsEvent.clientY)) {
+                        $('#calendar').fullCalendar('removeEvents', event._id);
+                        var el = $("<div class='fc-event'>").appendTo('#external-events-listing')
+                            .text(event.title);
+                        el.draggable({
+                            zIndex: 999,
+                            revert: true,
+                            revertDuration: 0
+                        });
+                        el.data('event', {
+                            title: event.title,
+                            id: event.id,
+                            stick: true
+                        });
+                    }
+                }
+            });
+
+
+            var isEventOverDiv = function (x, y) {
+
+                var external_events = $('#external-events');
+                var offset = external_events.offset();
+                offset.right = external_events.width() + offset.left;
+                offset.bottom = external_events.height() + offset.top;
+
+                // Compare
+                if (x >= offset.left &&
+                    y >= offset.top &&
+                    x <= offset.right &&
+                    y <= offset.bottom) {
+                    return true;
+                }
+                return false;
+
+            }
+
+
+        });
+    </script>
+</head>
+
+<body>
+    <div id='external-events'>
+        <p>
+            <strong>Draggable Events</strong>
+        </p>
+        <div id='eventNames'>
+            <div id='div' class='fc-event'>Wake-Up Time</div>
+            <div id='div' class='fc-event'>Breakfast Time</div>
+            <div id='div' class='fc-event'>Online School 1</div>
+            <div id='div' class='fc-event'>Online School 2</div>
+            <div id='div' class='fc-event'>Online School 3</div>
+            <div id='div' class='fc-event'>Lunch Time</div>
+            <div id='div' class='fc-event'>Snack Time</div>
+            <div id='div' class='fc-event'>Exercise Time 1</div>
+            <div id='div' class='fc-event'>Exercise Time 2</div>
+            <div id='div' class='fc-event'>Exercise Time 3</div>
+            <div id='div' class='fc-event'>Chore Time</div>
+            <div id='div' class='fc-event'>Family Talk Time</div>
+        </div>
+
+        <p>
+        </p>
+    </div>
+
+    <div id='calendar-container'>
+        <div id='calendar'></div>
+    </div>
+
+</body>
+
+</html>

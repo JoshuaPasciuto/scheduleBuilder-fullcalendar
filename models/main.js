@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         minTime: '06:00:00)',
 
+        longPressDelay: 500,
+
         allDaySlot: false,
         businessHours: false,
         eventOverlap: false,

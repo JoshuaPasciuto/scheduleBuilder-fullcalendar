@@ -47,7 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         minTime: '06:00:00)',
 
-        longPressDelay: 500,
+        longPressDelay: 250,
+        selectLongPressDelay: 250,
+        eventLongPressDelay: 250,
 
         allDaySlot: false,
         businessHours: false,
@@ -72,13 +74,6 @@ document.addEventListener('DOMContentLoaded', function () {
         eventClick: function (info) {
             info.event.remove();
         },
-
-        dayRender: function (date, cell) {
-
-            cell.addTouch();
-
-        },
-
 
     });
 

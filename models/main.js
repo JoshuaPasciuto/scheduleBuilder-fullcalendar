@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // initialize the external events
 
     new Draggable(containerEl, {
+
         itemSelector: '.fc-event',
         eventData: function (eventEl) {
             return {
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return mom.format('LLL');
             }
         },
+
         plugins: ['interaction', 'dayGrid', 'timeGrid'],
 
         defaultView: 'timeGridDay',
@@ -138,6 +140,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var morningWalkSubscribed = 0;
 
     //submit function
+    cell.addTouch();
+
     button.onclick = function () {
 
         //needed arrays

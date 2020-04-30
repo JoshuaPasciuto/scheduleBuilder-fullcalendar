@@ -24,7 +24,7 @@
 
         #external-events .fc-event {
             margin: 4.5px 0;
-            height: 40px;
+            height: 30px;
             font-size: 12pt;
             cursor: move;
         }
@@ -78,85 +78,6 @@
         .fc-time-grid-event {
             background-color: #5d58af !important;
         }
-
-
-        .hover_bkgr_fricc,
-        .hover_bkgr_fricc_custom {
-            background: rgba(0, 0, 0, .4);
-            cursor: pointer;
-            display: none;
-            height: 100%;
-            position: fixed;
-            text-align: center;
-            top: 0;
-            width: 100%;
-            z-index: 10000;
-        }
-
-        .hover_bkgr_fricc .helper,
-        .hover_bkgr_fricc_custom .helper-custom {
-            display: inline-block;
-            height: 100%;
-            vertical-align: middle;
-        }
-
-        .hover_bkgr_fricc>div,
-        .hover_bkgr_fricc_custom>div {
-            background-color: #fff;
-            box-shadow: 10px 10px 60px #555;
-            display: inline-block;
-            height: auto;
-            max-width: 551px;
-            min-height: 100px;
-            vertical-align: middle;
-            width: 60%;
-            position: relative;
-            border-radius: 8px;
-            padding: 15px 5%;
-        }
-
-        .popupCloseButton {
-            background-color: #fff;
-            border: 3px solid #999;
-            border-radius: 50px;
-            cursor: pointer;
-            display: inline-block;
-            font-family: arial;
-            font-weight: bold;
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 25px;
-            line-height: 30px;
-            width: 30px;
-            height: 30px;
-            text-align: center;
-        }
-
-        .popupCloseButton:hover {
-            background-color: #ccc;
-        }
-
-        .trigger_popup_fricc {
-            cursor: pointer;
-            font-size: 20px;
-            margin: 20px;
-            display: inline-block;
-            font-weight: bold;
-        }
-
-        label {
-            font-size: 20pt;
-            font-weight: bolder;
-            color: cornsilk;
-            background-color: blueviolet;
-            border-radius: 5px;
-        }
-
-        #desc {
-            height: 30px;
-            border-radius: 5px;
-        }
     </style>
 
     <meta charset='utf-8' />
@@ -165,7 +86,6 @@
     <link href='node_modules/@fullcalendar/core/main.css' rel='stylesheet' />
     <link href='node_modules/@fullcalendar/daygrid/main.css' rel='stylesheet' />
     <link href='node_modules/@fullcalendar/timegrid/main.css' rel='stylesheet' />
-    <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"> -->
 
 
     <script src='node_modules/@fullcalendar/core/main.js'></script>
@@ -173,10 +93,6 @@
     <script src='node_modules/@fullcalendar/timegrid/main.js'></script>
     <script src='node_modules/@fullcalendar/interaction/main.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"> -->
-    </script>
-
 
 
     <script>
@@ -211,10 +127,6 @@
 
             // initialize the external events
 
-            // $('#div').draggable();
-            // $("#div").mousedown(function () {
-            //     console.log('clicked!')
-
             new Draggable(containerEl, {
                 itemSelector: '.fc-event',
                 eventData: function (eventEl) {
@@ -234,13 +146,6 @@
                         return mom.format('LLL');
                     }
                 },
-
-                eventRender: function (eventInfo) {
-                    eventInfo.el.querySelector('.fc-title').innerHTML +=
-                        "<div class='eventDescription' id='eventDescription'>balls</div>";
-
-                },
-
                 plugins: ['interaction', 'dayGrid', 'timeGrid'],
 
                 defaultView: 'timeGridDay',
@@ -251,7 +156,7 @@
 
                 slotLabelInterval: '00:30',
 
-                minTime: '06:00:00',
+                minTime: '06:00:00)',
 
                 allDaySlot: false,
                 businessHours: false,
@@ -270,79 +175,6 @@
 
 
                 drop: function (info) {
-                    // // is the "remove after drop" checkbox checked?
-                    // // info.draggedEl.parentNode.append(info.draggedEl);
-                    // console.log(info.draggedEl.innerText.includes("Custom"));
-                    // var temp = info.draggedEl.innerText.includes("Custom")
-                    // if (temp = true) {
-                    //     console.log("inside custome 1")
-                    //     $('.hover_bkgr_fricc_custom').show(function () {
-                    //         $('.remove-custom').click(function () {
-                    //             // info.event.remove();
-                    //             calendar.getEventById(id)
-                    //             console.log(info)
-                    //             console.log("Remove event clicked")
-                    //         });
-                    //     })
-                    //     $('.popupCloseButton').click(function () {
-                    //         $('.hover_bkgr_fricc_custom').hide();
-                    //     });
-
-                    //     $('.remove_custom').click(function () {
-                    //         $('.hover_bkgr_fricc_custom').hide();
-                    //     });
-                    // }
-                },
-
-                eventClick: function (info) {
-                    // info.event.remove();
-                    console.log(info.event.title);
-
-                    $('.hover_bkgr_fricc').show(function () {
-                        var eventDesc = document.getElementById("desc").value
-
-
-                        $('.remove').click(function () {
-                            info.event.remove(this);
-                            console.log("Remove event clicked")
-                            console.log(eventDesc);
-                            eventDesc.innerText = "";
-                            console.log(eventDesc);
-
-                        });
-                        $('.update').click(function () {
-                            var eventDesc = document.getElementById("desc")
-                                .value
-                            var divInnerText = document.getElementById(
-                                "eventDescription");
-                            $('.eventDescription').each(function () {
-                                console.log(this.innerText);
-                                console.log(eventDesc);
-
-                                divInnerText.innerText = eventDesc;
-
-                                eventDesc.value = "";
-                            })
-
-                            // eventRender: function (info) {
-                            //     var tooltip = new Tooltip(info.el, {
-                            //         title: info.event.extendedProps
-                            //             .description,
-                            //         placement: 'top',
-                            //         trigger: 'hover',
-                            //         container: 'body'
-                            //     });
-                            // }
-                        });
-
-
-
-
-                        // event.description = eventDesc;
-
-                        // $('#calendar').fullCalendar('updateEvent', event);
-                    })
-
 
                     if ($.inArray(info.draggedEl.innerText, externalEventCheck) <= -1) {
                         externalEventCheck.push(info.draggedEl.innerText);
@@ -373,25 +205,6 @@
                 },
 
 
-
-            });
-
-            // $('.remove').click(function () {
-            //     info.event.remove();
-            //     console.log("Remove event clicked")
-            // });
-
-
-            // $('.hover_bkgr_fricc').click(function () {
-            //     $('.hover_bkgr_fricc').hide();
-            // });
-
-            $('.popupCloseButton').click(function () {
-                $('.hover_bkgr_fricc').hide();
-            });
-
-            $('.remove').click(function () {
-                $('.hover_bkgr_fricc').hide();
             });
 
             //builds calendar
@@ -469,8 +282,7 @@
                 //
                 $('div.fc-time').each(function () {
                     // var timeSub = (($(this).attr("data-full").substring(0, 7)))
-                    startTime.push($(this).attr("data-full").substring(0, 8).split(' ')
-                        .join(''))
+                    startTime.push($(this).attr("data-full").substring(0, 8).split(' ').join(''))
                 })
 
                 //check if array contains 'activity' sets activitySubscibed to 1 if yes, 0 if no. Sets activityTime to the value of the element in the position of the
@@ -649,6 +461,7 @@
                 console.log(events);
 
             }
+
         });
     </script>
 
@@ -692,38 +505,6 @@
 
         <p>
         </p>
-    </div>
-
-    <div class="hover_bkgr_fricc_custom">
-        <span class="helper-custom"></span>
-        <div>
-            <div class="popupCloseButton">&times;</div>
-            <form>
-                <label for="title">Event Title:</label>
-                <input type="text" id="title_custom" name="Title"><br>
-                <label for="description">Event Description:</label>
-                <input type="text" id="desc_custom" name="desc"><br>
-                <hr><br>
-                <input class="update-custom" type="button" value="Update Event">
-
-                <input class="remove-custom" type="button" value="Remove Event">
-            </form>
-        </div>
-    </div>
-
-    <div class="hover_bkgr_fricc">
-        <span class="helper"></span>
-        <div>
-            <div class="popupCloseButton">&times;</div>
-            <form>
-                <label for="description">Event Description:</label>
-                <input type="text" id="desc" name="desc"><br>
-                <hr><br>
-                <input class="update" type="button" value="Update Event">
-
-                <input class="remove" type="button" value="Remove Event">
-            </form>
-        </div>
     </div>
 
     <div id='calendar-container'>

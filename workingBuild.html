@@ -223,8 +223,12 @@
                 },
 
                 eventRender: function (eventInfo) {
+                    // eventInfo.el.querySelector('.fc-title').innerHTML +=
+                    // var divInnerHTML = eventInfo.el.querySelector('.fc-title').innerHTML;
+                    // console.log($(this).divInnerHTML);
+                    // divInnerHTML +=
                     eventInfo.el.querySelector('.fc-title').innerHTML +=
-                        "<div class='eventDescription' id='eventDescription'>balls</div>";
+                        "<div class='eventDescription' id='eventDescription'>PLACEHOLDER</div>";
 
                 },
 
@@ -289,6 +293,7 @@
 
 
                         $('.remove').click(function () {
+                            $('.hover_bkgr_fricc').hide();
                             info.event.remove(this);
                             console.log("Remove event clicked")
                             console.log(eventDesc);

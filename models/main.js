@@ -16,15 +16,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // initialize the external events
 
-    new Draggable(containerEl, {
+    $('#external-events').draggable();
 
-        itemSelector: '.fc-event',
-        eventData: function (eventEl) {
-            return {
-                title: eventEl.innerText
-            };
-        }
-    });
+    // new Draggable(containerEl, {
+
+    //     itemSelector: '.fc-event',
+    //     eventData: function (eventEl) {
+    //         return {
+    //             title: eventEl.innerText
+    //         };
+    //     }
+    // });
 
     // initialize the calendar
 
@@ -74,7 +76,9 @@ document.addEventListener('DOMContentLoaded', function () {
         },
 
         eventClick: function (info) {
-            info.event.remove();
+            // info.event.remove();
+            var iframe = "../public/iframePopup.html"
+            showiframe();
         },
 
     });

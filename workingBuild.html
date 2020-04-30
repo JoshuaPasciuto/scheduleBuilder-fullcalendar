@@ -100,6 +100,19 @@
 
             var eventContents = [];
 
+            Array.prototype.remove = function () {
+                var what, a = arguments,
+                    L = a.length,
+                    ax;
+                while (L && this.length) {
+                    what = a[--L];
+                    while ((ax = this.indexOf(what)) !== -1) {
+                        this.splice(ax, 1);
+                    }
+                }
+                return this;
+            };
+
             $('div.fc-event').each(function () {
                 eventContents.push($(this).text());
             });
@@ -124,7 +137,7 @@
             });
 
             // initialize the calendar
-
+            var externalEventCheck = [];
             var calendar = new Calendar(calendarEl, {
                 columnHeaderText: function (date) {
                     if (date.getDay() === date.getDay()) {
@@ -160,12 +173,34 @@
 
                 },
 
+
                 drop: function (info) {
-                    // is the "remove after drop" checkbox checked?
-                    // info.draggedEl.parentNode.append(info.draggedEl);
+
+                    if ($.inArray(info.draggedEl.innerText, externalEventCheck) <= -1) {
+                        externalEventCheck.push(info.draggedEl.innerText);
+                        var posInExt = ($.inArray(info.draggedEl.innerText, eventContents));
+                        posInExt = posInExt + 1
+                        var nthChildTest = $(".fc-event:nth-child(" + posInExt + ")").text()
+
+                        $(".fc-event:nth-child(" + posInExt + ")").css({
+                            "pointer-events": "none",
+                            "color": "pink"
+                        })
+
+
+                    }
+
                 },
 
                 eventClick: function (info) {
+                    var removePosInExt = ($.inArray(info.event.title, eventContents));
+                    removePosInExt = removePosInExt + 1
+                    $(".fc-event:nth-child(" + removePosInExt + ")").css({
+                        "pointer-events": "all",
+                        "color": "white"
+                    })
+
+                    externalEventCheck.remove(info.event.title)
                     info.event.remove();
                 },
 

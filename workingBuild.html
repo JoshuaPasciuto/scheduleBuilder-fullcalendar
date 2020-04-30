@@ -9,15 +9,54 @@
             font-size: 14px;
         }
 
+        #submit {
+            padding: 10px 19px;
+            font-size: 17px;
+            line-height: 1.471;
+            border-radius: 100px;
+            color: white;
+            background-color: #3498db;
+            border: none;
+            font-size: 15px;
+            font-weight: normal;
+            line-height: 1.4;
+            padding: 10px 15px;
+            -webkit-font-smoothing: subpixel-antialiased;
+            width: 150px;
+            height: 50px;
+        }
+
+        #submit:hover {
+            transition: box-shadow .25s, border-radius .25s, height .25s, width .25s, font-size .25s, font-weight .25s, transform .2s;
+            transform: scale(1.2);
+            border-radius: 4px;
+            box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.25);
+
+            /* box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 15pt;
+            font-weight: bold;
+            height: 42px;
+            width: 100px; */
+        }
+
+        .buttonHolder {
+            position: absolute;
+            bottom: 0;
+            margin-right: 45%;
+            margin-left: 45%;
+            margin-bottom: 3%;
+
+        }
+
         #external-events {
             position: relative;
             float: left;
             z-index: 1;
             height: 100%;
-            width: 10px;
             top: 10px;
             left: 30px;
-            width: 15%;
+            width: 10%;
             padding: 0 10px;
             border: 1px solid #ccc;
             background: #eee;
@@ -26,12 +65,23 @@
         #external-events .fc-event {
             margin: 4.5px 0;
             height: 30px;
+            width: 100%;
             font-size: 12pt;
             cursor: move;
+            text-align: center;
+            vertical-align: middle;
+            transition: backgound-color .5s, color .5s, border-color .5s;
+        }
+
+        #external-events .fc-event:hover {
+            transition: font-weight .25s, box-shawdow .25s, transform .25s;
+            box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.25);
+            font-weight: bold;
+            transform: scale(1.05);
         }
 
         #calendar-container {
-            height: 1200px;
+            height: 100%;
             margin-left: 10%;
             position: fixed;
             top: 0;
@@ -40,12 +90,20 @@
         }
 
         #calendar {
-            float: right;
+            float: left;
             position: relative;
             vertical-align: top;
             max-width: 85%;
-            margin: 10px;
+            margin-left: 75pt;
 
+        }
+
+        .fc-view-container {
+            max-height: 750px;
+        }
+
+        .fc-scroller {
+            max-height: 750px;
         }
 
         table {
@@ -185,7 +243,9 @@
 
                         $(".fc-event:nth-child(" + posInExt + ")").css({
                             "pointer-events": "none",
-                            "color": "pink"
+                            "color": "#95A5A6",
+                            "background-color": "#BDC3C7",
+                            "border-color": "#95A5A6"
                         })
 
 
@@ -198,7 +258,9 @@
                     removePosInExt = removePosInExt + 1
                     $(".fc-event:nth-child(" + removePosInExt + ")").css({
                         "pointer-events": "all",
-                        "color": "white"
+                        "color": "white",
+                        "background-color": "#3788d8",
+                        "border-color": "#95A5A6"
                     })
 
                     externalEventCheck.remove(info.event.title)
@@ -217,30 +279,30 @@
             var startTime = [];
 
             //start time
-            var wakeTime = "12:01 AM";
-            var breakfastTime = "12:01 AM";
-            var school1Time = "12:01 AM";
-            var school2Time = "12:01 AM";
-            var school3Time = "12:01 AM";
-            var lunchTime = "12:01 AM";
-            var snackTime = "12:01 AM";
-            var exercise1Time = "12:01 AM";
-            var exercise2Time = "12:01 AM";
-            var exercise3Time = "12:01 AM";
-            var choreTime = "12:01 AM";
-            var talkTime = "12:01 AM";
-            var dinnerTime = "12:01 AM";
-            var open1Time = "12:01 AM";
-            var open2Time = "12:01 AM";
-            var open3Time = "12:01 AM";
-            var bedtimePrepTime = "12:01 AM";
-            var bedtimeTime = "12:01 AM";
-            var custom1Time = "12:01 AM";
-            var custom2Time = "12:01 AM";
-            var custom3Time = "12:01 AM";
-            var nonETime = "12:01 AM";
-            var eTime = "12:01 AM";
-            var morningWalkTime = "12:01 AM";
+            var wakeTime = "12:01AM";
+            var breakfastTime = "12:01AM";
+            var school1Time = "12:01AM";
+            var school2Time = "12:01AM";
+            var school3Time = "12:01AM";
+            var lunchTime = "12:01AM";
+            var snackTime = "12:01AM";
+            var exercise1Time = "12:01AM";
+            var exercise2Time = "12:01AM";
+            var exercise3Time = "12:01AM";
+            var choreTime = "12:01AM";
+            var talkTime = "12:01AM";
+            var dinnerTime = "12:01AM";
+            var open1Time = "12:01AM";
+            var open2Time = "12:01AM";
+            var open3Time = "12:01AM";
+            var bedtimePrepTime = "12:01AM";
+            var bedtimeTime = "12:01AM";
+            var custom1Time = "12:01AM";
+            var custom2Time = "12:01AM";
+            var custom3Time = "12:01AM";
+            var nonETime = "12:01AM";
+            var eTime = "12:01AM";
+            var morningWalkTime = "12:01AM";
 
             //subscribed
             var wakeSubscribed = 0;
@@ -270,6 +332,21 @@
 
             //submit function
             button.onclick = function () {
+                const convertTime12to24 = (time12h) => {
+                    const [time, modifier] = time12h.split(' ');
+
+                    let [hours, minutes] = time.split(':');
+
+                    if (hours === '12') {
+                        hours = '00';
+                    }
+
+                    if (modifier === 'PM') {
+                        hours = parseInt(hours, 10) + 12;
+                    }
+
+                    return `${hours}:${minutes}`;
+                }
 
                 //needed arrays
                 events = [];
@@ -283,7 +360,10 @@
                 //
                 $('div.fc-time').each(function () {
                     // var timeSub = (($(this).attr("data-full").substring(0, 7)))
-                    startTime.push($(this).attr("data-full").substring(0, 8).split(' ').join(''))
+                    var tempTime = convertTime12to24($(this).attr("data-full").substring(0, 8)
+                        .split(' ').join(' '))
+                    var tempUnix = Date.parse('01 Jan 1970 ' + tempTime + ':00 GMT')
+                    startTime.push(tempUnix)
                 })
 
                 //check if array contains 'activity' sets activitySubscibed to 1 if yes, 0 if no. Sets activityTime to the value of the element in the position of the
@@ -502,14 +582,15 @@
             <div id='div' class='fc-event'>Morning Walk</div>
         </div>
 
-        <button id="submit" type="button">Submit!</button>
-
         <p>
         </p>
     </div>
 
     <div id='calendar-container'>
         <div id='calendar'></div>
+        <div class="buttonHolder">
+            <button id="submit" type="button">Submit!</button>
+        </div>
     </div>
 
 </body>

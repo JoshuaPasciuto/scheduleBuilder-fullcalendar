@@ -137,6 +137,72 @@
         .fc-time-grid-event {
             background-color: #5d58af !important;
         }
+
+        .hover_bkgr_fricc {
+            background: rgba(0, 0, 0, .4);
+            cursor: pointer;
+            display: none;
+            height: 100%;
+            position: fixed;
+            text-align: center;
+            top: 0;
+            width: 100%;
+            z-index: 10000;
+        }
+
+        .hover_bkgr_fricc .helper {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .hover_bkgr_fricc>div {
+            background-color: #fff;
+            box-shadow: 10px 10px 60px #555;
+            display: inline-block;
+            height: auto;
+            max-width: 551px;
+            min-height: 100px;
+            vertical-align: middle;
+            width: 60%;
+            position: relative;
+            border-radius: 8px;
+            padding: 15px 5%;
+        }
+
+        .popupCloseButton {
+            background-color: #fff;
+            border: 3px solid #999;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-block;
+            font-family: arial;
+            font-weight: bold;
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 25px;
+            line-height: 30px;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+        }
+
+        .popupCloseButton:hover {
+            background-color: #ccc;
+        }
+
+        .custom1 {
+            display: none;
+        }
+
+        .custom2 {
+            display: none;
+        }
+
+        .custom3 {
+            display: none;
+        }
     </style>
 
     <meta charset='utf-8' />
@@ -254,17 +320,21 @@
                 },
 
                 eventClick: function (info) {
-                    var removePosInExt = ($.inArray(info.event.title, eventContents));
-                    removePosInExt = removePosInExt + 1
-                    $(".fc-event:nth-child(" + removePosInExt + ")").css({
-                        "pointer-events": "all",
-                        "color": "white",
-                        "background-color": "#3788d8",
-                        "border-color": "#95A5A6"
-                    })
 
-                    externalEventCheck.remove(info.event.title)
-                    info.event.remove();
+                    const removeEvent = (remove) => {
+                        var removePosInExt = ($.inArray(info.event.title, eventContents));
+                        removePosInExt = removePosInExt + 1
+                        $(".fc-event:nth-child(" + removePosInExt + ")").css({
+                            "pointer-events": "all",
+                            "color": "white",
+                            "background-color": "#3788d8",
+                            "border-color": "#95A5A6"
+                        })
+
+                        externalEventCheck.remove(info.event.title)
+                        info.event.remove();
+                    }
+                    removeEvent();
                 },
 
 
@@ -273,36 +343,60 @@
             //builds calendar
             calendar.render();
 
+            $('.hover_bkgr_fricc').click(function () {
+                // $('.hover_bkgr_fricc').hide();
+            });
+            $('.popupCloseButton').click(function () {
+                $('.hover_bkgr_fricc').hide();
+            });
+
+            const convertTime12to24 = (time12h) => {
+                const [time, modifier] = time12h.split(' ');
+
+                let [hours, minutes] = time.split(':');
+
+                if (hours === '12') {
+                    hours = '00';
+                }
+
+                if (modifier === 'PM') {
+                    hours = parseInt(hours, 10) + 12;
+                }
+
+                return `${hours}:${minutes}`;
+            }
+
             //scheduler submit
             var button = document.getElementById('submit');
             var events = [];
             var startTime = [];
 
             //start time
-            var wakeTime = "12:01AM";
-            var breakfastTime = "12:01AM";
-            var school1Time = "12:01AM";
-            var school2Time = "12:01AM";
-            var school3Time = "12:01AM";
-            var lunchTime = "12:01AM";
-            var snackTime = "12:01AM";
-            var exercise1Time = "12:01AM";
-            var exercise2Time = "12:01AM";
-            var exercise3Time = "12:01AM";
-            var choreTime = "12:01AM";
-            var talkTime = "12:01AM";
-            var dinnerTime = "12:01AM";
-            var open1Time = "12:01AM";
-            var open2Time = "12:01AM";
-            var open3Time = "12:01AM";
-            var bedtimePrepTime = "12:01AM";
-            var bedtimeTime = "12:01AM";
-            var custom1Time = "12:01AM";
-            var custom2Time = "12:01AM";
-            var custom3Time = "12:01AM";
-            var nonETime = "12:01AM";
-            var eTime = "12:01AM";
-            var morningWalkTime = "12:01AM";
+            var wakeTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var breakfastTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var school1Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var school2Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var school3Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var lunchTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var snackTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var exercise1Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var exercise2Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var exercise3Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var choreTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var talkTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var dinnerTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var open1Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var open2Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var open3Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var bedtimePrepTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var bedtimeTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var custom1Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var custom2Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var custom3Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var nonETime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var eTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var morningWalkTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+
 
             //subscribed
             var wakeSubscribed = 0;
@@ -330,32 +424,42 @@
             var eSubscribed = 0;
             var morningWalkSubscribed = 0;
 
+
+
             //submit function
             button.onclick = function () {
-                const convertTime12to24 = (time12h) => {
-                    const [time, modifier] = time12h.split(' ');
 
-                    let [hours, minutes] = time.split(':');
+                var countOcc = 0;
 
-                    if (hours === '12') {
-                        hours = '00';
-                    }
-
-                    if (modifier === 'PM') {
-                        hours = parseInt(hours, 10) + 12;
-                    }
-
-                    return `${hours}:${minutes}`;
+                function getOccurrence(array, value) {
+                    return array.filter((v) => (v === value)).length;
                 }
 
-                //needed arrays
                 events = [];
                 startTime = [];
 
                 //pushes title text to events[]
                 $('.fc-title').each(function () {
                     events.push($(this).text())
+
+                    for (let i = 1; i < 4; i++) {
+                        countOcc = countOcc + getOccurrence(events, 'Custom ' + i)
+                        // if (getOccurrence(events, 'Custom ' + i) > 0) {
+                        //     countOcc = countOcc + 1
+                        //     console.log(countOcc)
+                        // }
+                    }
+
+                    console.log("countOcc: " + countOcc)
+
+                    if (countOcc > 0) {
+                        $('.hover_bkgr_fricc').show();
+                        $('.custom' + countOcc).show();
+
+                        console.log("showing custom" + countOcc)
+                    }
                 })
+
 
                 //
                 $('div.fc-time').each(function () {
@@ -498,7 +602,7 @@
                     custom1Subscribed = 1;
                     custom1Time = startTime[($.inArray("Custom 1", events))]
 
-                    console.log("Custom 1: " + custom2Subscribed, custom2Time)
+                    console.log("Custom 1: " + custom1Subscribed, custom1Time)
                 }
 
                 if ($.inArray("Custom 2", events) >= 0) {
@@ -592,6 +696,40 @@
             <button id="submit" type="button">Submit!</button>
         </div>
     </div>
+
+    <div class="hover_bkgr_fricc">
+        <span class="helper"></span>
+        <div class="custom1">
+            <div class="popupCloseButton">&times;</div>
+            <input type="text" id="eventTitle1" name="title" placeholder="Title"><br>
+            <input type="text" id="description1" name="description" placeholder="Description"><br>
+            <button id="update1" class="update1">Update Custom Event</button>
+        </div>
+        <div class="custom2">
+            <div class="popupCloseButton">&times;</div>
+            <input type="text" id="eventTitle1" name="title" placeholder="Title"><br>
+            <input type="text" id="description1" name="description" placeholder="Description"><br>
+            <hr><br>
+            <input type="text" id="eventTitle2" name="title" placeholder="Title"><br>
+            <input type="text" id="description2" name="description" placeholder="Description"><br>
+            <button id="update2" class="update2">Update Custom Event</button>
+        </div>
+        <div class="custom3">
+            <div class="popupCloseButton">&times;</div>
+            <input type="text" id="eventTitle1" name="title" placeholder="Title"><br>
+            <input type="text" id="description1" name="description" placeholder="Description"><br>
+            <hr><br>
+            <input type="text" id="eventTitle2" name="title" placeholder="Title"><br>
+            <input type="text" id="description2" name="description" placeholder="Description"><br>
+            <hr><br>
+            <input type="text" id="eventTitle3" name="title" placeholder="Title"><br>
+            <input type="text" id="description3" name="description" placeholder="Description"><br>
+            <button id="update3" class="update3">Update Custom Event</button>
+        </div>
+    </div>
+
+
+
 
 </body>
 

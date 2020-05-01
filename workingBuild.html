@@ -31,13 +31,7 @@
             transform: scale(1.2);
             border-radius: 4px;
             box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.25);
-
-            /* box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
-            text-align: center;
-            font-size: 15pt;
-            font-weight: bold;
-            height: 42px;
-            width: 100px; */
+            font-size: 18px;
         }
 
         .buttonHolder {
@@ -138,7 +132,9 @@
             background-color: #5d58af !important;
         }
 
-        .hover_bkgr_fricc {
+        .hover_bkgr_fricc1,
+        .hover_bkgr_fricc2,
+        .hover_bkgr_fricc3 {
             background: rgba(0, 0, 0, .4);
             cursor: pointer;
             display: none;
@@ -150,13 +146,17 @@
             z-index: 10000;
         }
 
-        .hover_bkgr_fricc .helper {
+        .hover_bkgr_fricc1 .helper,
+        .hover_bkgr_fricc2 .helper,
+        .hover_bkgr_fricc3 .helper {
             display: inline-block;
             height: 100%;
             vertical-align: middle;
         }
 
-        .hover_bkgr_fricc>div {
+        .hover_bkgr_fricc1>div,
+        .hover_bkgr_fricc2>div,
+        .hover_bkgr_fricc3>div {
             background-color: #fff;
             box-shadow: 10px 10px 60px #555;
             display: inline-block;
@@ -305,18 +305,13 @@
                         externalEventCheck.push(info.draggedEl.innerText);
                         var posInExt = ($.inArray(info.draggedEl.innerText, eventContents));
                         posInExt = posInExt + 1
-                        var nthChildTest = $(".fc-event:nth-child(" + posInExt + ")").text()
-
                         $(".fc-event:nth-child(" + posInExt + ")").css({
                             "pointer-events": "none",
                             "color": "#95A5A6",
                             "background-color": "#BDC3C7",
                             "border-color": "#95A5A6"
                         })
-
-
                     }
-
                 },
 
                 eventClick: function (info) {
@@ -336,18 +331,16 @@
                     }
                     removeEvent();
                 },
-
-
             });
 
             //builds calendar
             calendar.render();
 
-            $('.hover_bkgr_fricc').click(function () {
-                // $('.hover_bkgr_fricc').hide();
-            });
             $('.popupCloseButton').click(function () {
-                $('.hover_bkgr_fricc').hide();
+                console.log("Clicked")
+                $('.hover_bkgr_fricc1').hide();
+                $("#customForm").replaceWith(customFormHTML)
+                $(".custom1").hide();
             });
 
             const convertTime12to24 = (time12h) => {
@@ -430,6 +423,14 @@
             button.onclick = function () {
 
                 var countOcc = 0;
+                var customFormHTML =
+                    '<div id="customForm" class="custom1"><div class="popupCloseButton">&times;</div><input type="text" id="eventTitle1" name="title" placeholder="Title"><br><input type="text" id="description1" name="description" placeholder="Description"><br><hr><br></div>'
+                var buttonHTML =
+                    '<button type="submit" id="submit" class="update1">Update Custom Event</button>';
+                var custom2HTML =
+                    '<input type="text" id="eventTitle2" name="title" placeholder="Title"><br><input type="text" id="description2" name="description" placeholder="Description"><br><hr><br>'
+                var custom3HTML =
+                    '<input type="text" id="eventTitle3" name="title" placeholder="Title"><br><input type="text" id="description3" name="description" placeholder="Description"><br><hr><br>'
 
                 function getOccurrence(array, value) {
                     return array.filter((v) => (v === value)).length;
@@ -441,23 +442,6 @@
                 //pushes title text to events[]
                 $('.fc-title').each(function () {
                     events.push($(this).text())
-
-                    for (let i = 1; i < 4; i++) {
-                        countOcc = countOcc + getOccurrence(events, 'Custom ' + i)
-                        // if (getOccurrence(events, 'Custom ' + i) > 0) {
-                        //     countOcc = countOcc + 1
-                        //     console.log(countOcc)
-                        // }
-                    }
-
-                    console.log("countOcc: " + countOcc)
-
-                    if (countOcc > 0) {
-                        $('.hover_bkgr_fricc').show();
-                        $('.custom' + countOcc).show();
-
-                        console.log("showing custom" + countOcc)
-                    }
                 })
 
 
@@ -469,7 +453,43 @@
                     var tempUnix = Date.parse('01 Jan 1970 ' + tempTime + ':00 GMT')
                     startTime.push(tempUnix)
                 })
+                for (let i = 1; i < 4; i++) {
 
+                    var tempIncludesBoolean
+
+                    console.log(i)
+                    console.log("Before " + i + ": " + countOcc)
+                    // // countOcc = countOcc + getOccurrence(events, 'Custom ' + i)
+                    if (getOccurrence(events, 'Custom ' + i) > 0) {
+
+                        countOcc = countOcc + 1
+                        console.log("after Check for " + i + ": " +
+                            countOcc)
+                    }
+
+                }
+
+                console.log("countOcc: " + countOcc)
+                setTimeout(function () {
+                    if (countOcc >= 1) {
+                        $('.hover_bkgr_fricc1').show();
+                        $("#customForm").replaceWith(customFormHTML)
+                        $('.custom1').show();
+                        $("#customForm").append(buttonHTML)
+                        console.log("showing custom" + countOcc)
+                        if (countOcc >= 2) {
+                            $("#customForm").replaceWith(customFormHTML)
+                            $("#customForm").append(custom2HTML)
+                            console.log("CountOcc = 2")
+                            if (countOcc >= 3) {
+                                $("#customForm").replaceWith(customFormHTML)
+                                $("#customForm").append(custom3HTML)
+                                console.log("countOcc = 3")
+                            }
+                        }
+                    }
+
+                }, 250)
                 //check if array contains 'activity' sets activitySubscibed to 1 if yes, 0 if no. Sets activityTime to the value of the element in the position of the
                 //startTime[] as in the events[]
                 if ($.inArray("Wake-Up Time", events) >= 0) {
@@ -697,39 +717,15 @@
         </div>
     </div>
 
-    <div class="hover_bkgr_fricc">
+    <div id="hover_bkgr_fricc" class="hover_bkgr_fricc1">
         <span class="helper"></span>
-        <div class="custom1">
-            <div class="popupCloseButton">&times;</div>
-            <input type="text" id="eventTitle1" name="title" placeholder="Title"><br>
-            <input type="text" id="description1" name="description" placeholder="Description"><br>
-            <button id="update1" class="update1">Update Custom Event</button>
-        </div>
-        <div class="custom2">
+        <div id="customForm" class="custom1">
             <div class="popupCloseButton">&times;</div>
             <input type="text" id="eventTitle1" name="title" placeholder="Title"><br>
             <input type="text" id="description1" name="description" placeholder="Description"><br>
             <hr><br>
-            <input type="text" id="eventTitle2" name="title" placeholder="Title"><br>
-            <input type="text" id="description2" name="description" placeholder="Description"><br>
-            <button id="update2" class="update2">Update Custom Event</button>
-        </div>
-        <div class="custom3">
-            <div class="popupCloseButton">&times;</div>
-            <input type="text" id="eventTitle1" name="title" placeholder="Title"><br>
-            <input type="text" id="description1" name="description" placeholder="Description"><br>
-            <hr><br>
-            <input type="text" id="eventTitle2" name="title" placeholder="Title"><br>
-            <input type="text" id="description2" name="description" placeholder="Description"><br>
-            <hr><br>
-            <input type="text" id="eventTitle3" name="title" placeholder="Title"><br>
-            <input type="text" id="description3" name="description" placeholder="Description"><br>
-            <button id="update3" class="update3">Update Custom Event</button>
         </div>
     </div>
-
-
-
 
 </body>
 

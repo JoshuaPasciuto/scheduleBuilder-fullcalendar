@@ -30,3 +30,62 @@ Custom 2 Title: title2
 Custom 2 Desc: desc2
 Custom 3 Title: title3
 Custom 3 Desc: desc3
+
+var wakeTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var breakfastTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var school1Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var school2Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var school3Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var lunchTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var snackTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var exercise1Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var exercise2Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var exercise3Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var choreTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var talkTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var dinnerTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var open1Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var open2Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var open3Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var bedtimePrepTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var bedtimeTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var custom1Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var custom2Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var custom3Time = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var nonETime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var eTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+            var morningWalkTime = Date.parse('01 Jan 1970 ' + (convertTime12to24('12:01 AM') + ':00 GMT'));
+
+            //subscribed
+            var wakeSubscribed = 0;
+            var breakfastSubscribed = 0;
+            var school1Subscribed = 0;
+            var school2Subscribed = 0;
+            var school3Subscribed = 0;
+            var lunchSubscribed = 0;
+            var snackSubscribed = 0;
+            var exercise1Subscribed = 0;
+            var exercise2Subscribed = 0;
+            var exercise3Subscribed = 0;
+            var choreSubscribed = 0;
+            var talkSubscribed = 0;
+            var dinnerSubscribed = 0;
+            var open1Subscribed = 0;
+            var open2Subscribed = 0;
+            var open3Subscribed = 0;
+            var bedtimePrepSubscribed = 0;
+            var bedtimeSubscribed = 0;
+            var custom1Subscribed = 0;
+            var custom2Subscribed = 0;
+            var custom3Subscribed = 0;
+            var nonESubscribed = 0;
+            var eSubscribed = 0;
+            var morningWalkSubscribed = 0;
+
+            var custom1Title = "";
+            var custom2Title = "";
+            var customeTitle = "";
+
+            var custom1Desc = "";
+            var custom2Desc = "";
+            var customeDesc = "";

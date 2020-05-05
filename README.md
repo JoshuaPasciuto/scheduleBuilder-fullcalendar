@@ -9,6 +9,7 @@ Use
 Includes
 ---------------------------------------------------
  Fullcalendar with the plugins interaction, dayGrid, and timeGrid to produce the calendar
+ 
  Jquery and Jquery UI used for some elements of the mobile build (In progress)
     
     Dependencies in use

@@ -645,6 +645,7 @@
                 $('.fc-title').each(function () {
                     events.push($(this).text())
                 })
+
                 $('div.fc-time').each(function () {
                     var tempTime = convertTime12to24($(this).attr("data-full").substring(0, 8)
                         .split(' ').join(' '))
@@ -657,7 +658,6 @@
                     if (getOccurrence(events, 'Custom ' + i) > 0) {
                         countOcc = countOcc + 1
                     }
-
                 }
 
                 setTimeout(function () {
@@ -699,7 +699,6 @@
                             }
                         }
                     })
-
                 }, 250)
                 setTimeout(function () {
                     pushAll(events, startTime);
@@ -707,13 +706,9 @@
                 // console.log(startTime);
                 // console.log(events);
             }
-
         });
     </script>
-
 </head>
-
-
 
 <body style="overflow: visible">
     <div id='external-events'>

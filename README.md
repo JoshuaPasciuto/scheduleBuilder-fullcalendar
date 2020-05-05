@@ -6,10 +6,12 @@ Use
  For use on the COVID-19, S.I.P. Sanity journey for JourneyLabs Inc. 
  Using the MIT License
 
+ For addition use and testing, open 'workingBuild.html'
+
 Includes
 ---------------------------------------------------
  Fullcalendar with the plugins interaction, dayGrid, and timeGrid to produce the calendar
- 
+
  Jquery and Jquery UI used for some elements of the mobile build (In progress)
     
     Dependencies in use

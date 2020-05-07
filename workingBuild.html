@@ -241,15 +241,15 @@
     <meta charset='utf-8' />
 
 
-    <link href='node_modules/@fullcalendar/core/main.css' rel='stylesheet' />
-    <link href='node_modules/@fullcalendar/daygrid/main.css' rel='stylesheet' />
-    <link href='node_modules/@fullcalendar/timegrid/main.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.css' rel='stylesheet' />
 
 
-    <script src='node_modules/@fullcalendar/core/main.js'></script>
-    <script src='node_modules/@fullcalendar/daygrid/main.js'></script>
-    <script src='node_modules/@fullcalendar/timegrid/main.js'></script>
-    <script src='node_modules/@fullcalendar/interaction/main.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/interaction/main.min.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
@@ -681,16 +681,32 @@
 
                     $("#submitCustomEvents").click(function () {
                         if (countOcc >= 1) {
+                            if ($('#eventTitle1').val() == "" & $('#description1').val() ==
+                                "") {
+                                alert("Please fill out all fields below");
+                                return;
+                            }
                             custom1Title = $('#eventTitle1').val();
                             custom1Desc = $('#description1').val();
                             console.log("Custom 1 Title: " + custom1Title)
                             console.log("Custom 1 Desc: " + custom1Desc)
                             if (countOcc >= 2) {
+                                if ($('#eventTitle2').val() == "" & $('#description2')
+                                    .val() ==
+                                    "") {
+                                    alert("Please fill out all fields below");
+                                    return;
+                                }
                                 custom2Title = $('#eventTitle2').val();
                                 custom2Desc = $('#description2').val();
                                 console.log("Custom 2 Title: " + custom2Title)
                                 console.log("Custom 2 Desc: " + custom2Desc)
                                 if (countOcc >= 3) {
+                                    if ($('#eventTitle3').val() == "" & $('#description3')
+                                        .val() ==
+                                        "") {
+                                        alert("Please fill out all fields below");
+                                    }
                                     custom3Title = $('#eventTitle3').val();
                                     custom3Desc = $('#description3').val();
                                     console.log("Custom 3 Title: " + custom3Title)
@@ -699,7 +715,7 @@
                             }
                         }
                     })
-                }, 250)
+                }, 50)
                 setTimeout(function () {
                     pushAll(events, startTime);
                 }, 15)

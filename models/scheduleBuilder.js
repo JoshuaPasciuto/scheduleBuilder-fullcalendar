@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         $(".fc-event:nth-child(" + removePosInExt + ")").css({
             "pointer-events": "all",
             "color": "white",
-            "background-color": "#3788d8",
+            "background-color": "#5d58af",
             "border-color": "#95A5A6"
         }).removeClass('disabled')
 
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendar = new Calendar(calendarEl, {
         columnHeaderText: function (date) {
             if (date.getDay() === date.getDay()) {
-                return 'Your Childs Day!';
+                return "Your Child's Day!";
             } else {
                 return mom.format('LLL');
             }
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         slotLabelInterval: '00:30',
 
-        minTime: '06:00:00)',
+        minTime: '06:00:00',
 
         allDaySlot: false,
         businessHours: false,

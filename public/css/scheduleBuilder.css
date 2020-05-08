@@ -13,7 +13,7 @@ body {
     line-height: 1.471;
     border-radius: 100px;
     color: white;
-    background-color: #3498db;
+    background-color: #5d58af;
     border: none;
     font-size: 15px;
     font-weight: normal;
@@ -63,10 +63,12 @@ body {
 
 #external-events .fc-event {
     margin: 4.5px 0;
-    height: 30px;
+    height: 32px;
     width: 100%;
     font-size: 12pt;
     cursor: move;
+    background-color: #5d58af;
+    border: none;
     text-align: center;
     vertical-align: middle;
     transition: backgound-color .5s, color .5s, border-color .5s;

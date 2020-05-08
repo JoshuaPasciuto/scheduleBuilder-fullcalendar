@@ -30,7 +30,7 @@ body {
     line-height: 1.471;
     border-radius: 100px;
     color: white;
-    background-color: #5d58af;
+    background-color: rgb(93, 88, 175);
     border: none;
     font-weight: normal;
     padding: 10px 15px;
@@ -40,8 +40,8 @@ body {
 }
 
 .btn:hover {
-    transition: box-shadow .25s, border-radius .25s, height .25s, width .25s, font-size .25s, font-weight .25s, transform .2s;
-    transform: scale(1.2);
+    transition: box-shadow .5s, border-radius .5s, height .5s, width .5s, font-size .5s, font-weight .5s, transform .5s;
+    transform: scale(1.1);
     border-radius: 10px;
     /* box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.25); */
     /* font-size: 20px; */

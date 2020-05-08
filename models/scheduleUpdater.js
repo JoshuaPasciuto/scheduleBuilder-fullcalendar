@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    alert("This calendar is still under construction")
     var eventContents = [];
+    var userId = 2;
     var eventPrefill = [
         "Wake-Up Time",
         "Breakfast Time",
@@ -50,6 +52,41 @@ document.addEventListener('DOMContentLoaded', function () {
         return this;
     };
 
+    function getOccurrence(array, value) {
+        return array.filter((v) => (v === value)).length;
+    }
+
+    function sendSchedule() {
+        var settings = {
+            "url": "https://insertRealURLhere",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Accept": "application/json",
+                "X-Api-Token": "b417e2d7547949638b52c208aa7291ed",
+                "Content-Type": "application/json"
+            },
+            "data": `{\"type\": \"GRD\", \"userId\": ${userId}, \"customData\": {\"wakeSubscribed\": ${wakeSubscribed}, \"wakeTime\": ${wakeTime}, \"breakfastSubscribed\": ${breakfastSubscribed}, \"breakfastTime\": ${breakfastTime}, \"school1Subscribed\": ${school1Subscribed}, \"school1Time\": ${school1Time}, \"school2Subscribed\": ${school2Subscribed}, \"school2Time\": ${school2Time}, \"school3Subscribed\": ${school3Subscribed}, \"school3Time\": ${school3Time}, \"lunchSubscribed\": ${lunchSubscribed}, \"lunchTime\": ${lunchTime}, \"snackSubscribed\": ${snackSubscribed}, \"snackTime\": ${snackTime}, \"exercise1Subscribed\": ${exercise1Subscribed}, \"exercise1Time\": ${exercise1Time}, \"exercise2Subscribed\": ${exercise2Subscribed}, \"exercise2Time\": ${exercise2Time}, \"exercise3Subscribed\": ${exercise3Subscribed}, \"exercise3Time\": ${exercise3Time}, \"choreSubscribed\": ${choreSubscribed}, \"choreTime\": ${choreTime}, \"talkSubscribed\": ${talkSubscribed}, \"talkTime\": ${talkTime}, \"dinnerSubscribed\": ${dinnerSubscribed}, \"dinnerTime\": ${dinnerTime}, \"open1Subscribed\": ${open1Subscribed}, \"open1Time\": ${open1Time}, \"open2Subscribed\": ${open2Subscribed}, \"open2Time\": ${open2Time}, \"open3Subscribed\": ${open3Subscribed}, \"open3Time\": ${open3Time}, \"bedtimePrepSubscribed\": ${bedtimePrepSubscribed}, \"bedtimePrepTime\": ${bedtimePrepTime}, \"bedtimeSubscribed\": ${bedtimeSubscribed}, \"bedtimeTime\": ${bedtimeTime}, \"custom1Subscribed\": ${custom1Subscribed}, \"custom1Time\": ${custom1Time}, \"custom2Subscribed\": ${custom2Subscribed}, \"custom2Time\": ${custom2Time}, \"custom3Subscribed\": ${custom3Subscribed}, \"custom3Time\": ${custom3Time}, \"nonESubscribed\": ${nonESubscribed}, \"nonETime\": ${nonETime}, \"eSubscribed\": ${eSubscribed}, \"eTime\": ${eTime}, \"morningWalkTime\": ${morningWalkTime}, \"morningWalkSubscribed\": ${morningWalkSubscribed}, \"custom1Title\": \"${custom1Title}\", \"custom2Title\": \"${custom2Title}\", \"custom3Title\": \"${custom3Title}\", \"custom1Desc\": \"${custom1Desc}\", \"custom2Desc\": \"${custom2Desc}\", \"custom3Desc\": \"${custom3Desc}\"}}`,
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+    }
+
+    const removeEvent = (title, array) => {
+        var removePosInExt = ($.inArray(title, array));
+        removePosInExt = removePosInExt + 1
+        $(".fc-event:nth-child(" + removePosInExt + ")").css({
+            "pointer-events": "all",
+            "color": "white",
+            "background-color": "#5d58af",
+            "border-color": "#95A5A6"
+        }).removeClass('disabled')
+
+        externalEventCheck.remove(title)
+    }
+
     $('div.fc-event').each(function () {
         eventContents.push($(this).text());
     });
@@ -78,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendar = new Calendar(calendarEl, {
         columnHeaderText: function (date) {
             if (date.getDay() === date.getDay()) {
-                return 'Your Childs Day!';
+                return "Your Child's Day!";
             } else {
                 return mom.format('LLL');
             }
@@ -111,10 +148,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         },
 
-        eventRender: function () {
-
-        },
-
         drop: function (info) {
 
             if ($.inArray(info.draggedEl.innerText, externalEventCheck) <= -1) {
@@ -126,32 +159,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     "color": "#95A5A6",
                     "background-color": "#BDC3C7",
                     "border-color": "#95A5A6"
-                })
+                }).addClass('disabled')
             }
         },
 
         eventClick: function (info) {
-
-            const removeEvent = (remove) => {
-                var removePosInExt = ($.inArray(info.event.title, eventContents));
-                removePosInExt = removePosInExt + 1
-                $(".fc-event:nth-child(" + removePosInExt + ")").css({
-                    "pointer-events": "all",
-                    "color": "white",
-                    "background-color": "#3788d8",
-                    "border-color": "#95A5A6"
-                })
-
-                externalEventCheck.remove(info.event.title)
-                info.event.remove();
-            }
-            removeEvent();
+            removeEvent(info.event.title, eventContents);
+            info.event.remove();
         },
     });
     //builds calendar
     calendar.render();
 
-    function pushAll(array1, array2) {
+    $('.fc-event').mousedown(function () {
+        var testElement = document.getElementById('div');
+        if (this.innerHTML.search("2") != -1 && $(this).prev().hasClass('disabled') == false) {
+            alert("Please select the first event for this actvity")
+        } else if (this.innerHTML.search("3") != -1 && $(this).prev().hasClass('disabled') == false) {
+            alert("Please select the first event for this actvity")
+        }
+    });
+
+    function setAll(array1, array2) {
         if ($.inArray("Wake-Up Time", array1) >= 0) {
             wakeSubscribed = 1;
             wakeTime = array2[($.inArray("Wake-Up Time", array1))]
@@ -191,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
             lunchSubscribed = 1;
             lunchTime = array2[($.inArray("Lunch Time", array1))]
 
-            console.log("Lunch Time: " + wakeSubscribed, wakeTime)
+            console.log("Lunch Time: " + lunchSubscribed, lunchTime)
         }
 
         if ($.inArray("Snack Time", array1) >= 0) {
@@ -296,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function () {
             custom3Subscribed = 1;
             custom3Time = array2[($.inArray("Custom 3", array1))]
 
-            console.log("Custom 3: " + custom2Subscribed, custom2Time)
+            console.log("Custom 3: " + custom3Subscribed, custom3Time)
         }
 
         if ($.inArray("Non-E-Time", array1) >= 0) {
@@ -319,8 +348,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             console.log("Morning Walk: " + morningWalkSubscribed, morningWalkTime)
         }
-
-
 
     }
     const convertTime12to24 = (time12h) => {
@@ -398,14 +425,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var custom1Title = "";
     var custom2Title = "";
-    var customeTitle = "";
+    var custom3Title = "";
 
     var custom1Desc = "";
     var custom2Desc = "";
-    var customeDesc = "";
+    var custom3Desc = "";
 
     //submit function
     button.onclick = function () {
+
+        console.log("submit pressed")
 
         console.log("Variable Layout")
         console.log("Event: (subscribed) (time in Unix)")
@@ -420,25 +449,14 @@ document.addEventListener('DOMContentLoaded', function () {
         var custom3HTML =
             '<h3>Custom Event 3</h3><input type="text" id="eventTitle3" name="title" placeholder="Title"><br><br><input type="text" id="description3" name="description" placeholder="Description"><br><hr><br>'
 
-        function getOccurrence(array, value) {
-            return array.filter((v) => (v === value)).length;
-        }
-
         events = [];
-        eventTime = []
         startTime = [];
-
-        console.log(events)
-        console.log(startTime)
-        console.log(eventTime)
 
         $('.fc-title').each(function () {
             events.push($(this).text())
         })
 
         $('div.fc-time').each(function () {
-            var startEndTime = $(this).attr("data-full");
-            eventTime.push(startEndTime);
             var tempTime = convertTime12to24($(this).attr("data-full").substring(0, 8)
                 .split(' ').join(' '))
             var tempUnix = Date.parse('01 Jan 1970 ' + tempTime + ':00 GMT')
@@ -451,6 +469,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 countOcc = countOcc + 1
             }
         }
+
 
         setTimeout(function () {
             if (countOcc >= 1) {
@@ -506,12 +525,23 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 }
+
+                setTimeout(function () {
+                    if (countOcc >= 1) {
+                        setAll(events, startTime);
+                        sendSchedule();
+                    }
+                }, 15)
+
             })
+
         }, 50)
         setTimeout(function () {
-            pushAll(events, startTime);
+            if (countOcc == 0) {
+                setAll(events, startTime);
+                sendSchedule();
+            }
         }, 15)
-        // console.log(startTime);
-        // console.log(events);
+
     }
 });

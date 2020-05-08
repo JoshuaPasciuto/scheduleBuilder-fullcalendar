@@ -1,0 +1,75 @@
+<head>
+
+    <meta charset='utf-8' />
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.css' rel='stylesheet' />
+    <link href='../public/css/scheduleBuilder.css' rel='stylesheet' />
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/interaction/main.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="../models/scheduleBuilder.js"></script>
+
+</head>
+
+<body style="overflow: visible">
+    <div id='external-events'>
+        <p>
+            <strong>Draggable Events</strong>
+        </p>
+        <div id='eventNames'>
+            <div id='div' class='fc-event'>Wake-Up Time</div>
+            <div id='div' class='fc-event'>Breakfast Time</div>
+            <div id='div' class='fc-event'>Online School 1</div>
+            <div id='div' class='fc-event'>Online School 2</div>
+            <div id='div' class='fc-event'>Online School 3</div>
+            <div id='div' class='fc-event'>Lunch Time</div>
+            <div id='div' class='fc-event'>Snack Time</div>
+            <div id='div' class='fc-event'>Exercise Time 1</div>
+            <div id='div' class='fc-event'>Exercise Time 2</div>
+            <div id='div' class='fc-event'>Exercise Time 3</div>
+            <div id='div' class='fc-event'>Chore Time</div>
+            <div id='div' class='fc-event'>Family Talk Time</div>
+            <div id='div' class='fc-event'>Dinner Time</div>
+            <div id='div' class='fc-event'>Open Time 1</div>
+            <div id='div' class='fc-event'>Open Time 2</div>
+            <div id='div' class='fc-event'>Open Time 3</div>
+            <div id='div' class='fc-event'>Bedtime Prep</div>
+            <div id='div' class='fc-event'>Bedtime</div>
+            <div id='div' class='fc-event'>Custom 1</div>
+            <div id='div' class='fc-event'>Custom 2</div>
+            <div id='div' class='fc-event'>Custom 3</div>
+            <div id='div' class='fc-event'>Non-E-Time</div>
+            <div id='div' class='fc-event'>E-Time</div>
+            <div id='div' class='fc-event'>Morning Walk</div>
+        </div>
+
+        <p>
+        </p>
+    </div>
+
+    <div id='calendar-container'>
+        <div id='calendar'></div>
+        <div class="buttonHolder">
+            <button id="submit" type="button">Submit!</button>
+        </div>
+    </div>
+
+    <div id="hover_bkgr_fricc" class="hover_bkgr_fricc1">
+        <span class="helper"></span>
+        <div id="customForm" class="custom1">
+            <div id="close" class="popupCloseButton">&times;</div>
+            <input type="text" id="eventTitle1" name="title" placeholder="Title"><br>
+            <input type="text" id="description1" name="description" placeholder="Description"><br>
+            <hr><br>
+        </div>
+    </div>
+
+</body>
+
+</html>

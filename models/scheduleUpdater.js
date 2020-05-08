@@ -148,6 +148,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         },
 
+        eventRender: function () {
+            var i;
+            calendar.addEvent({
+                title: eventPrefill[1],
+                start: '2020-05-08',
+                allDay: true
+            });
+            for (i = 0; i < eventPrefill.length; i++) {
+
+            }
+        },
+
         drop: function (info) {
 
             if ($.inArray(info.draggedEl.innerText, externalEventCheck) <= -1) {

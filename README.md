@@ -7,7 +7,7 @@ Use
  Using the MIT License
 
  For addition use and testing, open 'index.html' and select with build you would like to test
- NOTE: Schedule Updater is still under construction
+ NOTE: Schedule Updater is still under construction. Looking into fullcalendar docs to see how to add events using time not date.
 
 Includes
 ---------------------------------------------------

@@ -6,7 +6,8 @@ Use
  For use on the COVID-19, S.I.P. Sanity journey for JourneyLabs Inc. 
  Using the MIT License
 
- For addition use and testing, open 'workingBuild.html'
+ For addition use and testing, open 'index.html' and select with build you would like to test
+ NOTE: Schedule Updater is still under construction
 
 Includes
 ---------------------------------------------------

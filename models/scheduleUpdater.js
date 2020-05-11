@@ -148,17 +148,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         },
 
-        eventRender: function () {
-            var i;
-            calendar.addEvent({
-                title: eventPrefill[1],
-                start: '2020-05-08',
-                allDay: true
-            });
-            for (i = 0; i < eventPrefill.length; i++) {
-
+        events: 
+                
+        
+        [{
+                title: 'BCH237',
+                start: '2020-05-08T10:30:00',
+                end: '2020-05-08T11:30:00',
             }
-        },
+            // more events ...
+        ],
 
         drop: function (info) {
 
